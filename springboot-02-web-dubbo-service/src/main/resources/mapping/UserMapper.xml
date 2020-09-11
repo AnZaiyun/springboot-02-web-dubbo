@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anzaiyun.servie.mapper.UserMapper">
+
+<!--    <resultMap id="BaseResultMap" type="com.anzaiyun.dao.UserDao">-->
+<!--        <result column="id" jdbcType="INTEGER" property="id" />-->
+<!--        <result column="userName" jdbcType="VARCHAR" property="userName" />-->
+<!--        <result column="passWord" jdbcType="VARCHAR" property="passWord" />-->
+<!--        <result column="realName" jdbcType="VARCHAR" property="realName" />-->
+<!--    </resultMap>-->
+
+    <select id="FindById" resultType="com.anzaiyun.api.dao.Users">
+        select t.l_id, t.vc_name, t.l_sex, t.l_tel, t.vc_mail,
+               t.vc_address, t.d_jrsj, t.l_state
+        from TUSER t where t.l_id = #{id}
+    </select>
+
+    <select id="FindByName" resultType="com.anzaiyun.api.dao.Users">
+        select t.l_id, t.vc_name, t.l_sex, t.l_tel, t.vc_mail,
+               t.vc_address, t.d_jrsj, t.l_state
+        from TUSER t where t.vc_name = #{vc_name}
+    </select>
+
+    <select id="FindUser" resultType="com.anzaiyun.api.dao.Users">
+        select t.l_id, t.vc_name, t.l_sex, t.l_tel, t.vc_mail,
+               t.vc_address, t.d_jrsj, t.l_state
+        from TUSER t
+        order by t.l_id
+    </select>
+
+    <select id="InsertUser" parameterType="com.anzaiyun.api.dao.Users">
+         insert into TUSER (L_ID, vc_name,L_SEX, l_tel, vc_mail,D_JRSJ)
+	     select seq_tuser_id.nextval, #{vc_name},1,#{l_tel},#{vc_mail},sysdate
+	     from dual
+    </select>
+
+    <select id="UpdateUser" parameterType="com.anzaiyun.api.dao.Users">
+         update TUSER t
+            set t.vc_name = #{vc_name},
+                t.vc_mail = #{vc_mail},
+                t.vc_address = #{vc_address}
+          where t.l_id = #{l_id}
+    </select>
+
+</mapper>

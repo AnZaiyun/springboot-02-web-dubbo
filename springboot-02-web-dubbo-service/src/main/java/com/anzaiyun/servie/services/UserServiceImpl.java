@@ -1,25 +1,50 @@
 package com.anzaiyun.servie.services;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.anzaiyun.api.dao.Users;
 import com.anzaiyun.api.services.UserService;
+import com.anzaiyun.servie.mapper.UserMapper;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@DubboService
 @Service
-@Component
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    UserMapper userMapper;
+
     @Override
     public Users FindById(int id) {
-        Users user = new Users("zhang3","1732478192","1732478192@qq.ocm");
-        return user;
+        return userMapper.FindById(id);
+    }
+
+    @Override
+    public Users FindByName(String vc_name) {
+        return userMapper.FindByName(vc_name);
     }
 
     @Override
     public Users[] FindUser() {
-        Users user1 = new Users("zhang3","1732478192","1732478192@qq.ocm");
-        Users user2 = new Users("li4","1376763502","1376763502@qq.ocm");
-        Users[] users = {user1,user2};
+        return userMapper.FindUser();
+    }
 
-        return users;
+    @Override
+    public Boolean InsertUser(Users userDao) {
+        if (userMapper.FindByName(userDao.getVc_name()) != null)
+            return false;
+
+        userMapper.InsertUser(userDao);
+        return true;
+    }
+
+    @Override
+    public Boolean UpdateUser(Users userDao) {
+        if (userMapper.FindById(userDao.getL_id()) == null)
+            return false;
+
+        userMapper.UpdateUser(userDao);
+        return true;
     }
 }
