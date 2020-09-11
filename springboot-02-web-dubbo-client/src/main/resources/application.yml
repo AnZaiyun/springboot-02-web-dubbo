@@ -1,0 +1,12 @@
+dubbo:
+  application:
+    name: springboot-02-web-dubbo-client
+  registry:
+    address: 127.0.0.1:2181
+    protocol: zookeeper
+  protocol:
+    name: dubbo
+    port: 20081
+
+server:
+  port: 8083
