@@ -10,3 +10,8 @@ dubbo:
 
 server:
   port: 8083
+
+spring:
+  groovy:
+    template:
+      cache: false
