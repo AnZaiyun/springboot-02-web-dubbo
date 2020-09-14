@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anzaiyun.servie.mapper.LevelMapper">
+
+    <select id="FindLevels" resultType="com.anzaiyun.api.dao.Level">
+        select t.l_id, t.vc_name, t.l_jfsx, t.l_jfxx
+        from tlevel t
+    </select>
+
+    <select id="FindLevelById" resultType="com.anzaiyun.api.dao.Level">
+        select t.l_id, t.vc_name, t.l_jfsx, t.l_jfxx
+        from tlevel t
+        where t.l_id = #{l_id}
+    </select>
+
+    <select id="FindLevelByName" resultType="com.anzaiyun.api.dao.Level">
+        select t.l_id, t.vc_name, t.l_jfsx, t.l_jfxx
+        from tlevel t
+        where t.l_id = #{vc_name}
+    </select>
+
+    <select id="AddLevel" parameterType="com.anzaiyun.api.dao.Level">
+        declare
+        v_l_id  number(8);
+        begin
+          select nvl(max(l_id),0) +1 into v_l_id from tlevel;
+
+          insert into tlevel(L_ID,VC_NAME,L_JFSX,L_JFXX)
+          select v_l_id ,#{vc_name},#{l_jfsx},#{l_jfxx}
+          from dual;
+        end;
+    </select>
+
+    <select id="UpdateLevel" parameterType="com.anzaiyun.api.dao.Level">
+        update tlevel t
+        set t.vc_name = {vc_name}
+        where t.l_id = #{l_id}
+    </select>
+
+    <select id="DelLevel" parameterType="com.anzaiyun.api.dao.Level">
+        delete from tlevel t
+        where t.l_id = #{l_id}
+    </select>
+
+
+</mapper>
