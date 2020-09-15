@@ -16,7 +16,7 @@
     <select id="FindLevelByName" resultType="com.anzaiyun.api.dao.Level">
         select t.l_id, t.vc_name, t.l_jfsx, t.l_jfxx
         from tlevel t
-        where t.l_id = #{vc_name}
+        where t.vc_name = #{vc_name}
     </select>
 
     <select id="AddLevel" parameterType="com.anzaiyun.api.dao.Level">
@@ -33,7 +33,9 @@
 
     <select id="UpdateLevel" parameterType="com.anzaiyun.api.dao.Level">
         update tlevel t
-        set t.vc_name = {vc_name}
+        set t.vc_name = #{vc_name},
+            t.l_jfsx = #{l_jfsx},
+            t.l_jfxx = #{l_jfxx}
         where t.l_id = #{l_id}
     </select>
 

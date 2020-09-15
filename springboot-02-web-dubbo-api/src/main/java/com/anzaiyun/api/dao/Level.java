@@ -2,7 +2,11 @@ package com.anzaiyun.api.dao;
 
 import com.anzaiyun.api.conf.ChineseNamesAnno;
 
-public class Level {
+import java.io.Serializable;
+
+public class Level implements Serializable {
+
+    private static final long serialVersionUID = 2L;
 
     private Integer l_id;
     private String vc_name;
@@ -17,6 +21,13 @@ public class Level {
     }
 
     public Level(String vc_name, Integer l_jfsx, Integer l_jfxx) {
+        this.vc_name = vc_name;
+        this.l_jfsx = l_jfsx;
+        this.l_jfxx = l_jfxx;
+    }
+
+    public Level(Integer l_id, String vc_name, Integer l_jfsx, Integer l_jfxx) {
+        this.l_id = l_id;
         this.vc_name = vc_name;
         this.l_jfsx = l_jfsx;
         this.l_jfxx = l_jfxx;

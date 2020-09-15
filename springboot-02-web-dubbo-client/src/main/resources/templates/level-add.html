@@ -1,46 +1,59 @@
 ﻿<!doctype html>
-<html lang="en">
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>后台登录-X-admin1.1</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="css/font.css">
-	<link rel="stylesheet" href="css/xadmin.css">
+    <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js"></script>
+    <script th:src="@{lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 
 </head>
 <body>
-    <form class="layui-form">
+    <form class="layui-form" action="/Main/Level/Add">
         <div class="layui-form-item">
-            <label for="level-name" class="layui-form-label">
+            <label for="vc_name" class="layui-form-label">
                 <span class="x-red">*</span>等级名
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="level-name" name="level-name" required="" lay-verify="required"
+                <input type="text" id="vc_name" name="vc_name" required="" lay-verify="required"
                 autocomplete="off"  class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="level-kiss" class="layui-form-label">
-                <span class="x-red">*</span>积分
+            <label for="l_jfxx" class="layui-form-label">
+                <span class="x-red">*</span>积分下限
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="level-kiss" name="level-kiss" required=""  lay-verify="required"
+                <input type="text" id="l_jfxx" name="l_jfxx" required=""  lay-verify="required"
                 autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="L_repass" class="layui-form-label">
+            <label for="l_jfsx" class="layui-form-label">
+                <span class="x-red">*</span>积分上限
             </label>
-            <button  class="layui-btn" lay-filter="save" lay-submit="">
+            <div class="layui-input-inline">
+                <input type="text" id="l_jfsx" name="l_jfsx" required=""  lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="level_save" class="layui-form-label">
+            </label>
+            <button  class="layui-btn" id ="level_save" lay-filter="save" lay-submit="">
                 保存
             </button>
         </div>
+
+        <label for="vc_msg" class="layui-form-label" id="vc_msg" th:text="${vc_msg}">
+        </label>
     </form>
      
 </body>

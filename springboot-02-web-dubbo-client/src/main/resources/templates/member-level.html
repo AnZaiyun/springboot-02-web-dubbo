@@ -223,7 +223,9 @@
                   </div>
                 </div> 
             </form>
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="level_add('添加用户','level-add.html','','600','300')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
+                    <button class="layui-btn" onclick="level_add('添加用户','/Main/LevelAdd','','600','300')"><i class="layui-icon">&#xe608;</i>添加</button>
+                    <span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -245,21 +247,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr th:each="level : ${levels}">
                         <td>
-                            <input type="checkbox" value="1" name="">
+                            <input type="checkbox" th:value="${level.l_id}" name="">
                         </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            新手
-                        </td>
+                        <td th:text="${level.l_id}"> </td>
+                        <td th:text="${level.vc_name}"> </td>
                         <td >
-                            0-1000
+                            <span th:text="${level.l_jfxx}"></span> -
+                            <span th:text="${level.l_jfsx}"></span>
                         </td>
                         <td class="td-manage">
-                            <a title="编辑" href="javascript:;" onclick="level_edit('编辑','level-edit.html','4','','300')"
+                            <a title="编辑" href="javascript:;" th:onclick="|level_edit('编辑','/Main/LevelEdit?l_id=${level.l_id}','4','','300')|"
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
