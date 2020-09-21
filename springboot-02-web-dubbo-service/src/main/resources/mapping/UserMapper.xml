@@ -12,19 +12,20 @@
     <select id="FindById" resultType="com.anzaiyun.api.dao.Users">
         select t.l_id, t.vc_name, t.l_sex, t.l_tel, t.vc_mail,
                t.vc_address, t.d_jrsj, t.l_state
-        from TUSER t where t.l_id = #{id}
+        from TUSER t where t.l_id = #{id} and t.l_state = 0
     </select>
 
     <select id="FindByName" resultType="com.anzaiyun.api.dao.Users">
         select t.l_id, t.vc_name, t.l_sex, t.l_tel, t.vc_mail,
                t.vc_address, t.d_jrsj, t.l_state
-        from TUSER t where t.vc_name = #{vc_name}
+        from TUSER t where t.vc_name = #{vc_name} and t.l_state = 0
     </select>
 
     <select id="FindUser" resultType="com.anzaiyun.api.dao.Users">
         select t.l_id, t.vc_name, t.l_sex, t.l_tel, t.vc_mail,
                t.vc_address, t.d_jrsj, t.l_state
         from TUSER t
+        where t.l_state = 0
         order by t.l_id
     </select>
 
@@ -41,5 +42,15 @@
                 t.vc_address = #{vc_address}
           where t.l_id = #{l_id}
     </select>
+
+    <select id="UpdateUserState" >
+         update TUSER t
+            set t.l_state = 1
+          where t.l_id = #{l_id}
+    </select>
+
+    <update id="DelUserByID">
+        delete from tuser t where t.l_id = #{l_id}
+    </update>
 
 </mapper>

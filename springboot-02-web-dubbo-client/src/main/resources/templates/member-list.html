@@ -252,7 +252,7 @@
                         </td>
                         <td th:text="${user.l_id}"> </td>
                         <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','/Main/MemberShow','10001','360','400')" th:text="${user.vc_name}">
+                            <u style="cursor:pointer" th:onclick="|member_show('查看','/Main/MemberShow?uid=${user.l_id}','10001','','510')|" th:text="${user.vc_name}">
                             </u>
                         </td>
                         <td th:if="${user.l_sex} eq 1" > 男 </td>
@@ -276,7 +276,7 @@
                             href="javascript:;" title="修改密码">
                                 <i class="layui-icon">&#xe631;</i>
                             </a>
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            <a title="删除" href="javascript:;" th:onclick="|member_del(this,'${user.l_id}')|"
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
@@ -406,11 +406,37 @@
         }
         /*用户-删除*/
         function member_del(obj,id){
-            layer.confirm('确认要删除吗？',function(index){
-                //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!',{icon:1,time:1000});
+            layui.use('layer',function () {
+                var layer = layui.layer;
+                layer.msg('你确定删除么？',{
+                    time:3000,//3秒自动关闭
+                    btn:['确定', '取消'],
+                    yes: function (index) {
+                        console.log(id);
+                        $.ajax({
+                            type: "GET",
+                            url: "/Main/MemberDel",
+                            data: {"uid":id},
+                            dataType: "json",
+                            success: function(data){
+                                console.log(data);
+                                $(obj).parents("tr").remove();
+                                layer.msg('已删除!',{icon:1,time:2000});
+                            },
+                            error: function (data) {
+                                console.log(data);
+                                layer.msg('未删除！',{icon:1,time:2000});
+
+                            }
+                        });
+                        layer.close(index);
+                    }
+                });
+
             });
+
+
+
         }
         </script>
          

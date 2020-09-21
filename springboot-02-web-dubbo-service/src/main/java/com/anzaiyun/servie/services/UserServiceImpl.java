@@ -47,4 +47,17 @@ public class UserServiceImpl implements UserService {
         userMapper.UpdateUser(userDao);
         return true;
     }
+
+    @Override
+    public Boolean DelUserByID(Integer l_id) {
+        userMapper.DelUserByID(l_id);
+
+        return true;
+    }
+
+    @Override
+    public Boolean UpdateUserState(Integer l_id) {
+        userMapper.UpdateUserState(l_id);
+        return true;
+    }
 }
